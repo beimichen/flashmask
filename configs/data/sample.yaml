@@ -1,0 +1,6 @@
+# Tiny committed sample set — lets `train_detector` smoke-run on a fresh clone.
+name: sample
+metadata: data/sample/sample_metadata.json
+yaml: null
+ratios: [0.6, 0.2, 0.2]
+out_dir: data/processed/sample

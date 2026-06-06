@@ -1,0 +1,32 @@
+# Phase 2: fine-tune on real labelled data with light augmentation and a frozen
+# stem. These are the actual hyperparameters behind the reported run
+# (mAP@50 0.929 / mAP@50-95 0.717 on the real validation set).
+name: finetune_real
+args:
+  epochs: 100
+  batch: 8
+  optimizer: SGD
+  lr0: 0.01
+  lrf: 0.05
+  momentum: 0.9
+  weight_decay: 0.0001
+  warmup_epochs: 3.0
+  box: 10.0
+  cls: 0.5
+  dfl: 1.5
+  patience: 30
+  amp: true
+  freeze: 3 # freeze the first few layers learned during synthetic pretraining
+  # light augmentation
+  mosaic: 0.0
+  mixup: 0.1
+  hsv_h: 0.005
+  hsv_s: 0.3
+  hsv_v: 0.3
+  degrees: 2.0
+  translate: 0.05
+  scale: 0.2
+  fliplr: 0.5
+  flipud: 0.0
+  erasing: 0.4
+  close_mosaic: 10

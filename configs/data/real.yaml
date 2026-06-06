@@ -1,0 +1,6 @@
+# Real, human-labelled diagram images. Held-out test split is real-only.
+name: real
+metadata: data/processed/review_metadata_cleaned.json
+yaml: null # if set, use this data.yaml directly instead of building from metadata
+ratios: [0.8, 0.1, 0.1]
+out_dir: data/processed/real

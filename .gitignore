@@ -1,0 +1,60 @@
+# ─── Models & weights (NEVER committed — see models/README.md) ───
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+# ignore the contents of models/ but keep the dir, its README and .gitkeep
+models/*
+!models/.gitkeep
+!models/README.md
+
+# ─── Data (only the sample set + docs are committed) ───
+# Ignore all data files, but keep the directory tree traversable so the
+# allow-rules below can re-include specific paths (git can't un-ignore a file
+# whose parent directory is excluded).
+data/**
+!data/**/
+!data/**/.gitkeep
+!data/**/README.md
+# keep the small committed sample set (images + metadata)
+!data/sample/**
+
+# ─── Experiment / training outputs ───
+runs/
+mlruns/
+wandb/
+outputs/            # Hydra default run dir
+multirun/
+lightning_logs/
+reports/**/events.out.*
+
+# ─── Secrets ───
+.env
+*.key
+
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.python-version.local
+
+# ─── Tooling caches ───
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.dvc/cache/
+.dvc/tmp/
+
+# ─── OS / editor ───
+.DS_Store
+.idea/
+.vscode/
+*.swp

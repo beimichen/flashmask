@@ -1,0 +1,10 @@
+# DVC remote configuration.
+#
+# No default remote is committed. To version data/models out-of-band, add one:
+#
+#   dvc remote add -d storage s3://my-bucket/flashmask      # or gdrive://, b2://, ssh://
+#   dvc remote modify storage ...                            # credentials via env / `--local`
+#
+# Keep secrets in `.dvc/config.local` (gitignored), never in this file.
+[core]
+    analytics = false

@@ -1,0 +1,12 @@
+# Top-level Hydra config for the detector trainer.
+# Compose phases by overriding groups on the CLI, e.g.:
+#   python -m flashmask.modeling.train_detector train=pretrain_synthetic data=synthetic
+defaults:
+  - data: real
+  - model: yolo_s
+  - train: finetune_real
+  - _self_
+
+seed: 42
+project_dir: runs
+run_name: ${train.name}

@@ -1,0 +1,3 @@
+# YOLO-nano @ 640px — faster/lighter, good for CPU iteration and smoke tests.
+weights: yolov5nu.pt
+imgsz: 640

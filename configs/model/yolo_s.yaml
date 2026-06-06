@@ -1,0 +1,5 @@
+# YOLO-small @ 960px — the configuration behind the reported metrics.
+# `weights` is a base checkpoint for phase 1, or a phase-1 best.pt for phase 2
+# (override on the CLI: model.weights=runs/pretrain_synthetic/weights/best.pt).
+weights: yolov5su.pt
+imgsz: 960

@@ -1,0 +1,7 @@
+# Synthetic text-on-background data (phase-1 pretraining). No test split:
+# real-world performance is only ever measured on the real-data test split.
+name: synthetic
+metadata: data/processed/synthetic/synthetic_metadata.json
+yaml: null
+ratios: [0.9, 0.1, 0.0]
+out_dir: data/processed/synthetic_yolo

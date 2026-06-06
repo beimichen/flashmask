@@ -1,0 +1,14 @@
+# Inference defaults (mirror flashmask.inference.pipeline.PipelineConfig).
+# Tuned on the validation set; conf/iou are deliberately low because masking a
+# little extra is cheaper than leaking answer text on a flashcard.
+img_size: 960
+conf_threshold: 0.20
+nms_iou: 0.10
+pad_pct_h: 0.05
+pad_pct_v: 0.125
+cls_input_size: 256
+cls_conf_thresh: 0.50
+ocr_override_conf_thresh: 0.60
+large_box_area_pct: 0.008
+upscale_height_thresh: 64
+target_height: 48

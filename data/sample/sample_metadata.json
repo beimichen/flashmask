@@ -1,0 +1,266 @@
+{
+  "/Users/beimichen/Desktop/flashmask/data/sample/images/sample_diagram_00.png": {
+    "status": "Accept as-is",
+    "source": "placeholder",
+    "boxes": [
+      {
+        "id": "r1",
+        "text": "Ribosome",
+        "x": 435,
+        "y": 156,
+        "width": 118,
+        "height": 36,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r2",
+        "text": "Nucleus",
+        "x": 57,
+        "y": 214,
+        "width": 143,
+        "height": 45,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r3",
+        "text": "Encoder",
+        "x": 358,
+        "y": 194,
+        "width": 128,
+        "height": 41,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r4",
+        "text": "Mitochondrion",
+        "x": 156,
+        "y": 192,
+        "width": 165,
+        "height": 37,
+        "group": null,
+        "visible": true
+      }
+    ]
+  },
+  "/Users/beimichen/Desktop/flashmask/data/sample/images/sample_diagram_01.png": {
+    "status": "Accept as-is",
+    "source": "placeholder",
+    "boxes": [
+      {
+        "id": "r1",
+        "text": "Loss",
+        "x": 122,
+        "y": 483,
+        "width": 82,
+        "height": 39,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r2",
+        "text": "Mitochondrion",
+        "x": 163,
+        "y": 84,
+        "width": 161,
+        "height": 36,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r3",
+        "text": "Mitochondrion",
+        "x": 458,
+        "y": 313,
+        "width": 181,
+        "height": 38,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r4",
+        "text": "Output",
+        "x": 498,
+        "y": 448,
+        "width": 96,
+        "height": 42,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r5",
+        "text": "Mitochondrion",
+        "x": 330,
+        "y": 195,
+        "width": 233,
+        "height": 44,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r6",
+        "text": "Encoder",
+        "x": 512,
+        "y": 125,
+        "width": 141,
+        "height": 44,
+        "group": null,
+        "visible": true
+      }
+    ]
+  },
+  "/Users/beimichen/Desktop/flashmask/data/sample/images/sample_diagram_02.png": {
+    "status": "Accept as-is",
+    "source": "placeholder",
+    "boxes": [
+      {
+        "id": "r1",
+        "text": "Input",
+        "x": 50,
+        "y": 453,
+        "width": 89,
+        "height": 46,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r2",
+        "text": "Gradient",
+        "x": 102,
+        "y": 487,
+        "width": 108,
+        "height": 37,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r3",
+        "text": "Output",
+        "x": 286,
+        "y": 107,
+        "width": 116,
+        "height": 48,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r4",
+        "text": "Input",
+        "x": 418,
+        "y": 472,
+        "width": 81,
+        "height": 43,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r5",
+        "text": "Nucleus",
+        "x": 485,
+        "y": 218,
+        "width": 137,
+        "height": 43,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r6",
+        "text": "Decoder",
+        "x": 362,
+        "y": 28,
+        "width": 143,
+        "height": 44,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r7",
+        "text": "Membrane",
+        "x": 108,
+        "y": 445,
+        "width": 164,
+        "height": 42,
+        "group": null,
+        "visible": true
+      }
+    ]
+  },
+  "/Users/beimichen/Desktop/flashmask/data/sample/images/sample_diagram_03.png": {
+    "status": "Accept as-is",
+    "source": "placeholder",
+    "boxes": [
+      {
+        "id": "r1",
+        "text": "Gradient",
+        "x": 256,
+        "y": 298,
+        "width": 142,
+        "height": 43,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r2",
+        "text": "Output",
+        "x": 175,
+        "y": 294,
+        "width": 89,
+        "height": 40,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r3",
+        "text": "Output",
+        "x": 490,
+        "y": 42,
+        "width": 103,
+        "height": 44,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r4",
+        "text": "Mitochondrion",
+        "x": 485,
+        "y": 118,
+        "width": 165,
+        "height": 37,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r5",
+        "text": "Mitochondrion",
+        "x": 378,
+        "y": 370,
+        "width": 181,
+        "height": 38,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r6",
+        "text": "Ribosome",
+        "x": 448,
+        "y": 20,
+        "width": 142,
+        "height": 40,
+        "group": null,
+        "visible": true
+      },
+      {
+        "id": "r7",
+        "text": "Nucleus",
+        "x": 82,
+        "y": 281,
+        "width": 130,
+        "height": 42,
+        "group": null,
+        "visible": true
+      }
+    ]
+  }
+}

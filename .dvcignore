@@ -1,0 +1,4 @@
+# Patterns DVC should ignore when tracking directories.
+*.tmp
+.DS_Store
+__pycache__/

@@ -1,0 +1,60 @@
+# Pipeline-as-code: the full data -> model DAG, reproducible with `dvc repro`.
+#
+# NOTE: running this end-to-end requires the source dataset (not redistributable)
+# and a configured DVC remote (`dvc remote add`). It is committed as an explicit,
+# versioned description of how the released model was produced. The committed
+# placeholder sample set (`just sample`) lets the later stages smoke-run.
+
+stages:
+  scrape:
+    cmd: python -m flashmask.data.scrape --sources arxiv --per-query 50 --out data/raw
+    outs:
+      - data/raw/arxiv
+
+  pdf_to_images:
+    cmd: python -m flashmask.data.pdf_to_image data/raw/arxiv data/interim/images
+    deps:
+      - data/raw/arxiv
+    outs:
+      - data/interim/images
+
+  synthesize:
+    cmd: >-
+      python -m flashmask.data.synthetic
+      --backgrounds data/interim/images --out data/processed/synthetic
+    deps:
+      - data/interim/images
+      - data/external/keywords.txt
+    outs:
+      - data/processed/synthetic
+
+  pretrain_detector:
+    cmd: >-
+      python -m flashmask.modeling.train_detector
+      train=pretrain_synthetic data=synthetic
+    deps:
+      - data/processed/synthetic
+      - configs/train/pretrain_synthetic.yaml
+    outs:
+      - runs/pretrain_synthetic/weights/best.pt
+
+  finetune_detector:
+    cmd: >-
+      python -m flashmask.modeling.train_detector
+      train=finetune_real data=real
+      model.weights=runs/pretrain_synthetic/weights/best.pt
+    deps:
+      - data/processed/review_metadata_cleaned.json
+      - runs/pretrain_synthetic/weights/best.pt
+      - configs/train/finetune_real.yaml
+    outs:
+      - runs/finetune_real/weights/best.pt
+
+  export_onnx:
+    cmd: >-
+      python -m flashmask.modeling.export
+      -w runs/finetune_real/weights/best.pt
+    deps:
+      - runs/finetune_real/weights/best.pt
+    outs:
+      - models/detector.onnx

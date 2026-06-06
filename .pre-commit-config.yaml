@@ -1,0 +1,21 @@
+# Run `pre-commit install` once after `just setup`.
+# ruff-check (with --fix) runs BEFORE ruff-format, per Astral's guidance.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+        args: [--maxkb=2048] # stop weights/datasets being committed by accident
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: detect-private-key # belt-and-braces against committing secrets
