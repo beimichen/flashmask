@@ -89,7 +89,10 @@ def main(n: int = 4) -> None:
         img, boxes = make_image(rng)
         path = out_dir / f"sample_diagram_{i:02d}.png"
         img.save(path)
-        metadata[str(path)] = {"status": "Accept as-is", "source": "placeholder", "boxes": boxes}
+        # store paths relative to the project root so the committed metadata is
+        # portable (the dataset builder resolves them against PROJECT_ROOT).
+        key = str(path.relative_to(paths.root))
+        metadata[key] = {"status": "Accept as-is", "source": "placeholder", "boxes": boxes}
 
     meta_path = paths.data_sample / "sample_metadata.json"
     meta_path.write_text(json.dumps(metadata, indent=2))

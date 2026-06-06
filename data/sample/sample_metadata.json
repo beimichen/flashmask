@@ -1,5 +1,5 @@
 {
-  "/Users/beimichen/Desktop/flashmask/data/sample/images/sample_diagram_00.png": {
+  "data/sample/images/sample_diagram_00.png": {
     "status": "Accept as-is",
     "source": "placeholder",
     "boxes": [
@@ -45,7 +45,7 @@
       }
     ]
   },
-  "/Users/beimichen/Desktop/flashmask/data/sample/images/sample_diagram_01.png": {
+  "data/sample/images/sample_diagram_01.png": {
     "status": "Accept as-is",
     "source": "placeholder",
     "boxes": [
@@ -111,7 +111,7 @@
       }
     ]
   },
-  "/Users/beimichen/Desktop/flashmask/data/sample/images/sample_diagram_02.png": {
+  "data/sample/images/sample_diagram_02.png": {
     "status": "Accept as-is",
     "source": "placeholder",
     "boxes": [
@@ -187,7 +187,7 @@
       }
     ]
   },
-  "/Users/beimichen/Desktop/flashmask/data/sample/images/sample_diagram_03.png": {
+  "data/sample/images/sample_diagram_03.png": {
     "status": "Accept as-is",
     "source": "placeholder",
     "boxes": [
