@@ -64,3 +64,7 @@ evaluate weights data:
 # Export a detector to ONNX (+ parity check if --parity-image given)
 export weights:
     uv run --extra train python -m flashmask.modeling.export -w {{weights}}
+
+# Active learning: rank an unlabeled pool by detector uncertainty, stage winners
+active-mine pool top_k="50":
+    uv run flashmask active mine --pool {{pool}} --top-k {{top_k}} --stage

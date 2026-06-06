@@ -22,6 +22,9 @@ Modeling
   evaluate          Evaluate a detector on the test split
   export            Export a detector to ONNX (+ parity check)
 
+Active learning
+  active mine       Rank an unlabeled pool by detector uncertainty (+ --stage)
+
 Serving
   serve             Launch the FastAPI service (uvicorn)
 
@@ -51,6 +54,12 @@ def main(argv: list[str] | None = None) -> None:
         from flashmask.modeling.evaluate import main as run
     elif command == "export":
         from flashmask.modeling.export import main as run
+    elif command == "active":
+        from flashmask.active.mine import main as run
+
+        # support "flashmask active mine ..." (mine is the only subcommand for now)
+        if rest and rest[0] == "mine":
+            rest = rest[1:]
     elif command == "serve":
         return _serve(rest)
     else:

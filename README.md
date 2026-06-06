@@ -60,20 +60,28 @@ flowchart LR
     G --> H[ONNX export<br/>+ parity check]
     H --> I[Pipeline:<br/>detect→classify→OCR→regex]
     I --> J[Gradio demo /<br/>FastAPI service]
-    F -.->|pre-label next batch| C
+    F -.->|uncertainty-mine + pre-label next batch| C
 ```
 
 **Two-phase training** is the core idea: real labelled diagrams are scarce, so the
 detector is pretrained on abundant synthetic text-on-background images (heavy
 augmentation), then fine-tuned on the real set (light augmentation, frozen stem).
 
-**Model-in-the-loop labeling (data flywheel).** Labeling starts with DocTR OCR,
-but once a detector is trained the labeling tool loads it and pre-labels new
-images from the model's *own* predictions — the annotator just corrects them
-(`models/detector.onnx` present → model; absent → DocTR). Corrected labels feed
-the next fine-tune, so each round refines the latest model instead of starting
-from scratch. This is a human-in-the-loop loop by design (you review every
-batch), not a fully autonomous retrainer.
+**Active-learning data flywheel.** Three things compound each labeling round:
+
+1. **Uncertainty mining** (`flashmask active mine --pool <dir> --stage`) runs the
+   current detector over unlabeled images and ranks them by how *unsure* it is —
+   mean binary entropy of box confidences (`entropy`), share of borderline boxes
+   (`margin`), or detector↔classifier disagreement (`disagreement`). The top-K
+   most informative images — not random ones — are selected to label next.
+2. **Model-in-the-loop labeling.** Selected images are staged into the label queue
+   pre-labelled with the model's own boxes (DocTR is used only the first time,
+   before any detector exists). The annotator corrects rather than draws.
+3. **Fine-tune** on the enlarged set, producing a better detector for the next
+   round.
+
+It's human-in-the-loop by design — you review every mined batch and trigger the
+fine-tune — not a fully autonomous retrainer (which would be over-engineering here).
 
 ## Built with
 
@@ -148,7 +156,7 @@ The nine former `train_*.py` variants are gone: every recipe is now a
 ## Project structure
 
 ```
-src/flashmask/      data/ labeling/ modeling/ inference/ serving/  (the package)
+src/flashmask/      data/ labeling/ modeling/ inference/ active/ serving/  (the package)
 configs/            Hydra config groups — one trainer, many recipes
 apps/               Gradio demo + Streamlit labeling tool
 scripts/            sample-data generator

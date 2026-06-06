@@ -1,0 +1,7 @@
+# Reference defaults for `flashmask active mine` (the CLI accepts these as flags).
+strategy: entropy # entropy | margin | disagreement
+top_k: 50
+conf_floor: 0.05 # ignore detections below this confidence (noise)
+band: [0.20, 0.50] # "borderline" confidence band for the margin strategy
+empty_image_score: 0.0 # score for images with no detections (raise to surface false-negatives)
+stage: false # copy winners into the label queue + seed model pre-labels
