@@ -65,4 +65,4 @@ def score_detections(
     # disagreement
     if cls_probs is None or len(cls_probs) != len(confidences):
         raise ValueError("disagreement strategy needs classifier probs aligned with confidences")
-    return _mean([abs(c - p) for c, p in zip(confidences, cls_probs)])
+    return _mean([abs(c - p) for c, p in zip(confidences, cls_probs, strict=True)])
