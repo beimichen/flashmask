@@ -5,7 +5,7 @@
 **Detect and mask text regions in diagram images — to turn any figure into a study flashcard.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.10–3.12](https://img.shields.io/badge/python-3.10%E2%80%933.12-blue.svg)](pyproject.toml)
+[![Python 3.11–3.12](https://img.shields.io/badge/python-3.11%E2%80%933.12-blue.svg)](pyproject.toml)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![CI](https://github.com/beimichen/flashmask/actions/workflows/ci.yml/badge.svg)](https://github.com/beimichen/flashmask/actions/workflows/ci.yml)
 
