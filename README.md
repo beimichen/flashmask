@@ -51,7 +51,7 @@ provenance of these numbers.
 ```mermaid
 flowchart LR
     A[arXiv / PMC / CORE<br/>PDF scrape] --> B[PDF → image]
-    B --> C[DocTR-assisted<br/>labeling tool]
+    B --> C[Model- or DocTR-<br/>assisted labeling]
     C --> D[Synthetic gen:<br/>fonts on backgrounds]
     D --> E[YOLO phase 1<br/>synthetic pretrain]
     C --> F[YOLO phase 2<br/>real fine-tune]
@@ -60,11 +60,20 @@ flowchart LR
     G --> H[ONNX export<br/>+ parity check]
     H --> I[Pipeline:<br/>detect→classify→OCR→regex]
     I --> J[Gradio demo /<br/>FastAPI service]
+    F -.->|pre-label next batch| C
 ```
 
 **Two-phase training** is the core idea: real labelled diagrams are scarce, so the
 detector is pretrained on abundant synthetic text-on-background images (heavy
 augmentation), then fine-tuned on the real set (light augmentation, frozen stem).
+
+**Model-in-the-loop labeling (data flywheel).** Labeling starts with DocTR OCR,
+but once a detector is trained the labeling tool loads it and pre-labels new
+images from the model's *own* predictions — the annotator just corrects them
+(`models/detector.onnx` present → model; absent → DocTR). Corrected labels feed
+the next fine-tune, so each round refines the latest model instead of starting
+from scratch. This is a human-in-the-loop loop by design (you review every
+batch), not a fully autonomous retrainer.
 
 ## Built with
 
@@ -168,5 +177,5 @@ across different hardware/GPUs.
 
 ## License
 
-MIT — see [LICENSE](LICENSE). Author: **Bei Chen** ·
+MIT — see [LICENSE](LICENSE). Author: **Bei Mi Chen** ·
 [github.com/beimichen](https://github.com/beimichen)

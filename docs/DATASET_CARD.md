@@ -19,8 +19,9 @@ Average ≈ 12–13 text boxes per real image.
 
 1. **Acquire** PDFs (`flashmask.data.scrape`) and render pages to images
    (`flashmask.data.pdf_to_image`).
-2. **Pre-label** with DocTR OCR, clustering words into regions via union-find
-   (`flashmask.labeling.doctr_assist`).
+2. **Pre-label** model-in-the-loop (`flashmask.labeling.prelabel`): use the trained
+   detector if one exists (refine its own predictions), else fall back to DocTR OCR
+   + union-find word clustering (`flashmask.labeling.doctr_assist`).
 3. **Correct** boxes in the Streamlit tool (`apps/label_tool.py`); annotations are
    stored as a review-metadata JSON:
    ```json

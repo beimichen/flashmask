@@ -1,9 +1,10 @@
-"""Streamlit OCR-assisted labeling tool (backend-free rewrite).
+"""Streamlit model-in-the-loop labeling tool (backend-free rewrite).
 
-Run DocTR to pre-label text regions, correct them on a canvas, and save to a
-review-metadata JSON consumed by the dataset builder. Unlike the original, this
-has no dependency on any private application backend — it uses the standalone
-``Region`` model and ``doctr_assist`` clustering from the package.
+Pre-label text regions, correct them on a canvas, and save to a review-metadata
+JSON consumed by the dataset builder. Pre-labeling uses the **trained detector**
+once one exists at ``models/detector.onnx`` (refining the model's own
+predictions), and falls back to **DocTR OCR** the first time — closing the
+label -> train -> label flywheel. No dependency on any private app backend.
 
 Run:  streamlit run apps/label_tool.py
 """
@@ -18,11 +19,13 @@ import streamlit as st
 from PIL import Image
 from streamlit_drawable_canvas import st_canvas
 
-from flashmask.labeling.doctr_assist import cluster_words, run_doctr
+from flashmask.config import paths
+from flashmask.labeling.prelabel import prelabel, should_use_model
 from flashmask.labeling.region import Region
 
 IMAGE_DIR = Path("data/raw/to_label")
 METADATA_PATH = Path("data/processed/review_metadata.json")
+DETECTOR_PATH = paths.models / "detector.onnx"
 MAX_DISPLAY_WIDTH = 800
 
 st.set_page_config(page_title="flashmask labeling", layout="wide")
@@ -39,6 +42,12 @@ idx = st.session_state.idx
 img_path = images[idx]
 st.sidebar.markdown(f"**Image {idx + 1}/{len(images)}** — `{img_path.name}`")
 
+using_model = should_use_model(DETECTOR_PATH)
+st.sidebar.caption(
+    f"Pre-labeling source: **{'trained detector' if using_model else 'DocTR OCR'}**"
+    + ("" if using_model else f"  (no model at `{DETECTOR_PATH}` yet)")
+)
+
 conf = st.slider("Min OCR confidence", 0.0, 1.0, 0.5, 0.01)
 line_tol = st.slider("Vertical gap tolerance (px)", 0, 100, 10)
 horiz_tol = st.slider("Horizontal gap tolerance (px)", 0, 200, 10)
@@ -48,9 +57,16 @@ if "regions" not in st.session_state or st.session_state.get("regions_for") != s
     st.session_state.regions = [Region.from_dict(b) for b in saved] if saved else []
     st.session_state.regions_for = str(img_path)
 
-if st.button("▶ Run OCR pre-label"):
-    words = run_doctr(str(img_path), conf)
-    st.session_state.regions = cluster_words(words, line_tol, horiz_tol)
+if st.button("▶ Pre-label with model" if using_model else "▶ Pre-label with DocTR (OCR)"):
+    regions, source = prelabel(
+        str(img_path),
+        detector_path=DETECTOR_PATH,
+        doctr_conf=conf,
+        line_tol=line_tol,
+        horiz_tol=horiz_tol,
+    )
+    st.session_state.regions = regions
+    st.toast(f"Pre-labeled {len(regions)} regions via {source}")
 
 pil = Image.fromarray(cv2.cvtColor(cv2.imread(str(img_path)), cv2.COLOR_BGR2RGB))
 scale = min(1.0, MAX_DISPLAY_WIDTH / pil.width)
